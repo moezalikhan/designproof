@@ -1,0 +1,16 @@
+# Alloy artefacts
+org.alloytools.alloy.dist.jar
+buggy/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# macOS
+.DS_Store
