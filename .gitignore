@@ -1,16 +1,23 @@
-# Alloy artefacts
+# Alloy artefacts (the jar is downloaded by CI and the dashboard)
 org.alloytools.alloy.dist.jar
 buggy/
+permissions/
+permissions_before/
 
 # Python
 __pycache__/
 *.pyc
 *.pyo
+.pytest_cache/
 
 # Virtual environments
 .venv/
 venv/
 env/
+
+# Secrets
+.env
+.streamlit/secrets.toml
 
 # macOS
 .DS_Store

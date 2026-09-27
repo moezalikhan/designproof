@@ -15,6 +15,10 @@ def can_edit(user_id: str, file_id: str) -> bool:
     if team is None:
         return False
 
+    # Rule 3: removed users are denied via every route, including share links.
+    if user_id in team.removed:
+        return False
+
     if user_id in team.members:
         return True
 

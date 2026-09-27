@@ -1,0 +1,20 @@
+[
+  {
+    "check": "MembersCanEdit",
+    "result": "UNSAT",
+    "violated": false,
+    "counterexample_atoms": []
+  },
+  {
+    "check": "ShareLinkHoldersCanEdit",
+    "result": "UNSAT",
+    "violated": false,
+    "counterexample_atoms": []
+  },
+  {
+    "check": "RemovedUsersCannotEdit",
+    "result": "UNSAT",
+    "violated": false,
+    "counterexample_atoms": []
+  }
+]

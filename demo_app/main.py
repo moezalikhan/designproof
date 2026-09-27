@@ -47,6 +47,9 @@ def add_member(team_id: str, body: AddMemberRequest):
     if team is None:
         raise HTTPException(status_code=404, detail="Team not found")
     team.members.add(body.user_id)
+    # If this user was previously removed, clear that flag so Rule 3 does not
+    # block them now that they are a current member again.
+    team.removed.discard(body.user_id)
     # ensure the user exists in the users store
     if body.user_id not in models.users:
         models.users[body.user_id] = models.User(id=body.user_id)
