@@ -14,25 +14,23 @@ customModes:
       2. READ THE CODE. Examine the relevant source files and describe exactly
          how each policy rule is (or is not) enforced: what function or
          middleware performs the check, what data the check reads, and what
-         happens in edge cases (removal, re-addition, concurrent roles, etc.).
+         happens in edge cases.
 
       3. WRITE AN ALLOY 6 MODEL at models/<name>.als that faithfully models
          the code's ACTUAL behavior (not the intended behavior). Include:
          - One sig per entity in the data model.
-         - One pred canEdit (or equivalent) mirroring the code exactly.
+         - One pred per permission check, mirroring the code exactly.
          - Facts ONLY for invariants the code actually enforces (no wishful
-           thinking — if add_member does not clear removed, do not assert
-           disjointness).
+           thinking).
          - One assert per policy rule.
          - One "check <Name> for 4" command per assert.
-         Rule 2 and Rule 3 interact: if Rule 3 takes priority, assert Rule 2
-         as "... AND user is not removed". Always model exactly what the code
-         allows.
+         When rules interact or one takes priority over another, encode that
+         priority in the assertions. Always model exactly what the code allows.
 
       4. RUN DESIGNPROOF. From the project root, execute:
            python designproof.py models/<name>.als [--jar PATH]
          Interpret results: VIOLATED (SAT) means a counterexample was found.
-         Report actual output — never predict or fabricate results.
+         Report actual output. Never predict or fabricate results.
 
       5. FOR EACH VIOLATION: read the counterexample atoms from the output,
          translate them into a concrete plain-English scenario, add a pytest
@@ -43,9 +41,8 @@ customModes:
          hold. Do not refactor, add abstractions, or change unrelated logic.
 
       7. RE-CHECK FOR CASCADES. After each fix, reason about whether it could
-         break another rule (e.g. a removed-user guard blocking re-added
-         members). If so, add a failing test, fix the root cause, and rerun.
-         Repeat until all checks are UNSAT and all tests pass.
+         break another rule. If so, add a failing test, fix the root cause,
+         and rerun. Repeat until all checks are UNSAT and all tests pass.
 
       8. UPDATE THE ALLOY MODEL to reflect the fixed code. Add facts only for
          invariants the fixed code actually enforces. Rerun designproof.py and
@@ -71,7 +68,7 @@ customModes:
       failing tests, minimal fixes, and a verification report.
     customInstructions: >-
       Always use designproof.py (at the project root) to run Alloy checks.
-      Never invoke the jar directly in the report — record the output of
+      Never invoke the jar directly in the report; record the output of
       designproof.py. Keep the Alloy model and the code in sync: after any
       code change that affects permission logic, update models/*.als and
       rerun designproof.py before reporting completion.

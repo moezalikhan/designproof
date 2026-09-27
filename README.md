@@ -87,3 +87,6 @@ results*.json             saved Alloy results for each snapshot
 report.md                 full verification report
 packages.txt              installs Java on Streamlit Community Cloud
 ```
+## IBM Bob task session screenshots
+
+Screenshots of every IBM Bob task session used to build DesignProof are in [`docs/bob-sessions/`](docs/bob-sessions/).
