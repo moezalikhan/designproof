@@ -1,0 +1,23 @@
+[
+  {
+    "check": "MembersCanEdit",
+    "result": "SAT",
+    "violated": true,
+    "counterexample_atoms": [
+      "f = {File$0}",
+      "u = {User$0}"
+    ]
+  },
+  {
+    "check": "ShareLinkHoldersCanEdit",
+    "result": "UNSAT",
+    "violated": false,
+    "counterexample_atoms": []
+  },
+  {
+    "check": "RemovedUsersCannotEdit",
+    "result": "UNSAT",
+    "violated": false,
+    "counterexample_atoms": []
+  }
+]
